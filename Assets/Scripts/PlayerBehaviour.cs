@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     public Animator anim;
+    public Rigidbody rb;
 
     [Header("Movimiento")]
     public float walkSpeed = 2f;
@@ -12,41 +13,57 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("Animaciones")]
     public float animationSmooth = 0.1f;
 
+    private Vector2 input;
+    private bool running;
+
+    void Awake()
+    {
+        if (anim == null)
+            anim = GetComponent<Animator>();
+
+        if (rb == null)
+            rb = GetComponent<Rigidbody>();
+    }
+
     void Update()
     {
-        // Obtener input
+        // Recoger input
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
-        Vector2 input = new Vector2(x, y);
+        input = Vector2.ClampMagnitude(new Vector2(x, y), 1f);
 
-        // Evitar que diagonal sea más rápida
-        input = Vector2.ClampMagnitude(input, 1f);
+        running = Input.GetKey(KeyCode.LeftShift);
 
-        // Comprobar si está corriendo
-        bool running = Input.GetKey(KeyCode.LeftShift);
-
-        // Valores para el Blend Tree
+        // Valores del Blend Tree
         float speedX = input.x;
         float speedY = input.y;
 
-        // Caminar hacia delante utiliza 0.5
+        // Caminar hacia delante
         if (speedY > 0 && !running)
         {
             speedY *= 0.5f;
         }
 
-        // Actualizar Animator
+        // Actualizar animaciones
         anim.SetFloat("speedX", speedX, animationSmooth, Time.deltaTime);
         anim.SetFloat("speedY", speedY, animationSmooth, Time.deltaTime);
+    }
 
-        // Movimiento real del personaje
+    void FixedUpdate()
+    {
         float speed = running ? runSpeed : walkSpeed;
 
+        // Movimiento relativo al personaje
         Vector3 movement =
             transform.right * input.x +
             transform.forward * input.y;
 
-        transform.position += movement * speed * Time.deltaTime;
+        Vector3 velocity = movement * speed;
+
+        // Conservar la velocidad vertical (gravedad)
+        velocity.y = rb.linearVelocity.y;
+
+        rb.linearVelocity = velocity;
     }
 }
