@@ -10,58 +10,61 @@ public class PlayerBehaviour : MonoBehaviour
     public float walkSpeed = 2f;
     public float runSpeed = 5f;
 
-    [Header("Animaciones")]
-    public float animationSmooth = 0.1f;
-
     private Vector2 input;
     private bool running;
 
     void Awake()
     {
-        if (anim == null)
-            anim = GetComponent<Animator>();
+        // if (anim == null)
+        //     anim = GetComponentInChildren<Animator>();
 
         if (rb == null)
             rb = GetComponent<Rigidbody>();
+
+        if (anim == null)
+            Debug.LogError("No se encuentra el Animator.");
+
+        if (rb == null)
+            Debug.LogError("No se encuentra el Rigidbody.");
     }
 
     void Update()
     {
-        // Recoger input
+        if (anim == null)
+            return;
+
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
         input = Vector2.ClampMagnitude(new Vector2(x, y), 1f);
-
         running = Input.GetKey(KeyCode.LeftShift);
 
-        // Valores del Blend Tree
         float speedX = input.x;
         float speedY = input.y;
 
         // Caminar hacia delante
-        if (speedY > 0 && !running)
-        {
+        if (speedY > 0f && !running)
             speedY *= 0.5f;
-        }
 
-        // Actualizar animaciones
-        anim.SetFloat("speedX", speedX, animationSmooth, Time.deltaTime);
-        anim.SetFloat("speedY", speedY, animationSmooth, Time.deltaTime);
+        // Asignar directamente, sin suavizado
+        anim.SetFloat("speedX", speedX);
+        anim.SetFloat("speedY", speedY);
     }
 
     void FixedUpdate()
     {
+        if (rb == null)
+            return;
+
         float speed = running ? runSpeed : walkSpeed;
 
-        // Movimiento relativo al personaje
         Vector3 movement =
             transform.right * input.x +
             transform.forward * input.y;
 
         Vector3 velocity = movement * speed;
 
-        // Conservar la velocidad vertical (gravedad)
+        // Conservar la gravedad
         velocity.y = rb.linearVelocity.y;
 
         rb.linearVelocity = velocity;
