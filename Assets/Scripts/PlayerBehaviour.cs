@@ -37,19 +37,18 @@ public class PlayerBehaviour : MonoBehaviour
         float y = Input.GetAxisRaw("Vertical");
 
         input = Vector2.ClampMagnitude(new Vector2(x, y), 1f);
+
         running = Input.GetKey(KeyCode.LeftShift);
 
         float speedX = input.x;
         float speedY = input.y;
 
-        // Caminar hacia delante
-        if (speedY > 0f && !running)
-            speedY *= 0.5f;
+        speedY = running ? input.y : input.y * 0.5f;
 
-        // Asignar directamente, sin suavizado
-        anim.SetFloat("speedX", speedX);
-        anim.SetFloat("speedY", speedY);
+        anim.SetFloat("speedX", speedX, 0.1f, Time.deltaTime);
+        anim.SetFloat("speedY", speedY, 0.1f, Time.deltaTime);
     }
+
 
     void FixedUpdate()
     {
