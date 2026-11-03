@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Ido-Survivor.slnx",
+    "dotnet.defaultSolution": "IdoSurvivor.slnx",
     "dotnet.enableWorkspaceBasedDevelopment": false
 }
