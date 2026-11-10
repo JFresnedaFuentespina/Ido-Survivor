@@ -168,7 +168,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 62.463
+    FieldOfView: 64.7
     OrthographicSize: 30
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -196,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 359653987}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08909, y: 13.94, z: -4.6}
+  m_LocalPosition: {x: 0.41091397, y: 16.240002, z: -12.499999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -215,12 +215,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineThirdPersonFollow
   Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0.5, y: 5, z: 0}
+  ShoulderOffset: {x: 2, y: 2.5, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 1
-  CameraDistance: 5
+  CameraDistance: 18.9
   AvoidObstacles:
-    Enabled: 0
+    Enabled: 1
     CollisionFilter:
       serializedVersion: 2
       m_Bits: 1
@@ -249,7 +249,7 @@ MonoBehaviour:
       Enabled: 0
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
-  CenterOnActivate: 1
+  CenterOnActivate: 0
   TargetOffset: {x: 0, y: 0, z: 0}
   Damping: {x: 0.5, y: 0.5}
   Lookahead:
@@ -497,7 +497,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: c3e313266d2184a4aa983625437e079a, type: 3}
 --- !u!4 &466742030 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 615752492655149177, guid: c3e313266d2184a4aa983625437e079a, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5871187290244329819, guid: c3e313266d2184a4aa983625437e079a, type: 3}
   m_PrefabInstance: {fileID: 466742029}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &832575517
@@ -1192,7 +1192,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 62.463
+  field of view: 64.7
   orthographic: 0
   orthographic size: 30
   m_Depth: 0
@@ -1219,7 +1219,7 @@ Transform:
   m_GameObject: {fileID: 2061483769}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08909, y: 13.94, z: -4.6}
+  m_LocalPosition: {x: 0.41091397, y: 16.240002, z: -12.499999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
